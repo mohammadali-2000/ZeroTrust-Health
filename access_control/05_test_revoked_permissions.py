@@ -10,17 +10,17 @@ from dotenv import load_dotenv
 fetch_reader_userid = importlib.import_module("01_fetch_reader_userid")
 store_permissioned_secret = importlib.import_module("02_store_permissioned_secret")
 retrieve_secret = importlib.import_module("03_retrieve_secret")
-revoke_read_permissions = importlib.import_module("04_revoke_read_permissions")
+revoke_read_access_control = importlib.import_module("04_revoke_read_permissions")
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from helpers.nillion_client_helper import create_nillion_client
-from helpers.nillion_keypath_helper import getUserKeyFromFile, getNodeKeyFromFile
+from mpc_network_utils.nillion_client_helper import create_nillion_client
+from mpc_network_utils.nillion_keypath_helper import getUserKeyFromFile, getNodeKeyFromFile
 
 load_dotenv()
 
 async def main(args = None):
     parser = argparse.ArgumentParser(
-        description="Check that retrieval permissions on a Secret have been revoked"
+        description="Check that retrieval access_control on a Secret have been revoked"
     )
     parser.add_argument(
         "--store_id",
@@ -41,10 +41,10 @@ async def main(args = None):
     try:
         secret_name = "my_int1"
         await reader.retrieve_secret(cluster_id, args.store_id, secret_name)
-        print(f"⛔ FAIL: {reader_user_id} user id with revoked permissions was allowed to access secret", file=sys.stderr)
+        print(f"⛔ FAIL: {reader_user_id} user id with revoked access_control was allowed to access secret", file=sys.stderr)
     except Exception as e:
         if str(e) == "retrieving secret: the user is not authorized to access the secret":
-            print(f"🦄 Success: After user permissions were revoked, {reader_user_id} was not allowed to access secret", file=sys.stderr)
+            print(f"🦄 Success: After user access_control were revoked, {reader_user_id} was not allowed to access secret", file=sys.stderr)
         else:
             raise(e)
 

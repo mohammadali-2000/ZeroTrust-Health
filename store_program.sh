@@ -14,7 +14,7 @@ if [ "$#" -ne 1 ]; then
 fi
 
 RELATIVE_PROGRAM_PATH="$SCRIPT_PATH/$1"
-# Extract the program name from the path (e.g., addition_simple from programs-compiled/addition_simple.nada.bin)
+# Extract the program name from the path (e.g., addition_simple from circuits-compiled/addition_simple.nada.bin)
 PROGRAM_NAME=$(basename "$RELATIVE_PROGRAM_PATH" .nada.bin)
 
 # Execute the command

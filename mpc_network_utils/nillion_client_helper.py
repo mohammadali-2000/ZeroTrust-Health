@@ -1,6 +1,6 @@
 import os
 import py_nillion_client as nillion
-from helpers.nillion_payments_helper import create_payments_config
+from mpc_network_utils.nillion_payments_helper import create_payments_config
 
 def create_nillion_client(userkey, nodekey):
     bootnodes = [os.getenv("NILLION_BOOTNODE_MULTIADDRESS")]

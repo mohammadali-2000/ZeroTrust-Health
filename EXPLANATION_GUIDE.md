@@ -27,7 +27,7 @@ graph TD
 
 ```
 ZeroTrust-Health/
-├── healthcare_imaging_compute/       # Main Python program
+├── zerotrust_ml_core/       # Main Python program
 │   ├── healthcare_imaging_compute.py # ← MAIN ENTRY POINT (451 lines)
 │   ├── config.py                     # Party/environment config
 │   ├── utils/
@@ -35,10 +35,10 @@ ZeroTrust-Health/
 │   └── data/
 │       └── cancer_data.csv           # UCI breast cancer dataset (569 rows)
 │
-├── programs/
+├── nada_circuits/
 │   └── healthcare_imaging_compute.py # ← NADA MPC PROGRAM (runs on Nillion network)
 │
-├── programs-compiled/                # Compiled .nada.bin files go here
+├── circuits-compiled/                # Compiled .nada.bin files go here
 │
 ├── helpers/
 │   ├── nillion_client_helper.py      # Nillion client factory
@@ -46,7 +46,7 @@ ZeroTrust-Health/
 │   └── nillion_keypath_helper.py     # Key file helpers
 │
 ├── bootstrap-local-environment.sh    # Starts Nillion devnet + generates keys
-├── compile_programs.sh               # Compiles Nada programs to MIR bytecode
+├── compile_circuits.sh               # Compiles Nada programs to MIR bytecode
 ├── requirements.txt                  # Python dependencies
 └── docker-compose.yml               # Docker alternative to local setup
 ```
@@ -141,7 +141,7 @@ patient_prediction = result / scaling_factor / scaling_factor
 1. **Party1 (Patient)** stores test data as secrets on Nillion
 2. **Party2 (HP1)** stores `scaled_theta_subset_sm` + weight=25 as secrets
 3. **Party3 (HP2)** stores `scaled_theta_subset_lg` + weight=75 as secrets
-4. Party2 & Party3 grant compute permissions to Party1
+4. Party2 & Party3 grant compute access_control to Party1
 5. **Blind compute** triggered: Nillion nodes run the Nada program
 6. Nada program computes: `Σ x_test[i] * combined_theta[i]`
 7. Output revealed ONLY to Party1 (the patient)
@@ -151,7 +151,7 @@ patient_prediction = result / scaling_factor / scaling_factor
 ## 📜 The Nada Program (MPC Code)
 
 ```python
-# programs/healthcare_imaging_compute.py (runs INSIDE Nillion network)
+# nada_circuits/breast_cancer_circuit.py (runs INSIDE Nillion network)
 def nada_main():
     # 3 parties
     patient = Party(name="Party1")
@@ -201,12 +201,12 @@ NILLION_USERKEY_PATH_PARTY_1=/tmp/tmpXXXXXX
 # ... Party 2, 3, 4, 5 ...
 ```
 
-### What `compile_programs.sh` Does
-- Runs `pynadac` on every `.py` file in `programs/`
-- Outputs compiled `.nada.bin` binary to `programs-compiled/`
+### What `compile_circuits.sh` Does
+- Runs `pynadac` on every `.py` file in `nada_circuits/`
+- Outputs compiled `.nada.bin` binary to `circuits-compiled/`
 - The main program references this binary at runtime:
   ```python
-  program_mir_path = f"../programs-compiled/{CONFIG_PROGRAM_NAME}.nada.bin"
+  program_mir_path = f"../circuits-compiled/{CONFIG_PROGRAM_NAME}.nada.bin"
   ```
 
 ---
@@ -226,14 +226,14 @@ source .venv/bin/activate
 ./bootstrap-local-environment.sh
 
 # 3. Compile the Nada MPC program
-./compile_programs.sh
+./compile_circuits.sh
 
 # 4. Run the main program
-cd healthcare_imaging_compute
-python3 healthcare_imaging_compute.py
+cd zerotrust_ml_core
+python3 main_compute.py
 
 # Optional: skip matplotlib plots (useful in CI/headless)
-python3 healthcare_imaging_compute.py --disable_plot
+python3 main_compute.py --disable_plot
 ```
 
 ### Docker Alternative

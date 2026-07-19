@@ -29,10 +29,10 @@ python3 -m pip install -r requirements.txt && \
 bash ./create_venv.sh && \
 ./bootstrap-local-environment.sh && \
 echo "Waiting 60 seconds for preprocessing elements" && sleep 60 && \
-sh compile_programs.sh && \
+sh compile_circuits.sh && \
 
 run_pytest_in_dir client_single_party_compute && \
 run_pytest_in_dir client_multi_party_compute && \
 run_pytest_in_dir millionaires_problem_example && \
-run_pytest_in_dir permissions && \
-run_pytest_in_dir store_and_retrieve_secrets
+run_pytest_in_dir access_control && \
+run_pytest_in_dir secret_vault

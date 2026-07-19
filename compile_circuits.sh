@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # This script compiles all $PROGRAMS_FOLDER programs to mir
-PROGRAMS_FOLDER="programs"
-COMPILED_PROGRAMS_FOLDER="programs-compiled"
+PROGRAMS_FOLDER="nada_circuits"
+COMPILED_PROGRAMS_FOLDER="circuits-compiled"
 
 SCRIPT_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}" 2>/dev/null)" && pwd -P)"
 TARGET_PATH="${SCRIPT_PATH}/${COMPILED_PROGRAMS_FOLDER}"

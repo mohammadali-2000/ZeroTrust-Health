@@ -7,14 +7,14 @@ import pytest
 from dotenv import load_dotenv
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from helpers.nillion_client_helper import create_nillion_client
-from helpers.nillion_keypath_helper import getUserKeyFromFile, getNodeKeyFromFile
+from mpc_network_utils.nillion_client_helper import create_nillion_client
+from mpc_network_utils.nillion_keypath_helper import getUserKeyFromFile, getNodeKeyFromFile
 
 load_dotenv()
 
 async def main(args = None):
     parser = argparse.ArgumentParser(
-        description="Use read permissions to retrieve a secret owned by another user on the Nillion network"
+        description="Use read access_control to retrieve a secret owned by another user on the Nillion network"
     )
     parser.add_argument(
         "--store_id",
@@ -39,7 +39,7 @@ async def main(args = None):
     result = await reader.retrieve_secret(cluster_id, args.store_id, secret_name)
 
     print(f"🦄 Retrieved {secret_name} secret, value = {result[1].value}", file=sys.stderr)
-    print("\n\nRun the following command to revoke the reader's retrieve permissions to the secret")
+    print("\n\nRun the following command to revoke the reader's retrieve access_control to the secret")
     print(f"\n📋 python3 04_revoke_read_permissions.py --store_id {args.store_id} --revoked_user_id {reader_user_id}")
     return [args.store_id, reader_user_id]
 

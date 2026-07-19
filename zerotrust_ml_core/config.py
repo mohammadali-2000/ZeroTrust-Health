@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # replace this with your program_id
-CONFIG_PROGRAM_NAME = "healthcare_imaging_compute"
+CONFIG_PROGRAM_NAME = "breast_cancer_circuit"
 
 CONFIG_NUM_PARAMS = 31
 

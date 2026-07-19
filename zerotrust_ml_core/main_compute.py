@@ -21,8 +21,8 @@ from config import (
 )
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from helpers.nillion_client_helper import create_nillion_client
-from helpers.nillion_keypath_helper import getUserKeyFromFile, getNodeKeyFromFile
+from mpc_network_utils.nillion_client_helper import create_nillion_client
+from mpc_network_utils.nillion_keypath_helper import getUserKeyFromFile, getNodeKeyFromFile
 
 load_dotenv()
 
@@ -248,7 +248,7 @@ async def main():
 
     # Setup nillion
     cluster_id = os.getenv("NILLION_CLUSTER_ID")
-    program_mir_path = f"../programs-compiled/{CONFIG_PROGRAM_NAME}.nada.bin"
+    program_mir_path = f"../circuits-compiled/{CONFIG_PROGRAM_NAME}.nada.bin"
 
     num_params = CONFIG_NUM_PARAMS
     # num_params = train_data.columns.size
@@ -356,12 +356,12 @@ async def main():
         secret_bindings = nillion.ProgramBindings(program_id)
         secret_bindings.add_input_party(party_name, party_id_n)
         
-        # Create permissions object
-        print(f"\nSetting up permissions for {party_name}...\n") 
-        permissions = nillion.Permissions.default_for_user(user_id_n)
+        # Create access_control object
+        print(f"\nSetting up access_control for {party_name}...\n") 
+        access_control = nillion.Permissions.default_for_user(user_id_n)
         
-        # Give compute permissions to the first party
-        compute_permissions = {
+        # Give compute access_control to the first party
+        compute_access_control = {
             user_id_test_patient: {program_id},
         }
         permissions.add_compute_permissions(compute_permissions)

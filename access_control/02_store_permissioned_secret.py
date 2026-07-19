@@ -8,8 +8,8 @@ import pytest
 from dotenv import load_dotenv
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from helpers.nillion_client_helper import create_nillion_client
-from helpers.nillion_keypath_helper import getUserKeyFromFile, getNodeKeyFromFile
+from mpc_network_utils.nillion_client_helper import create_nillion_client
+from mpc_network_utils.nillion_keypath_helper import getUserKeyFromFile, getNodeKeyFromFile
 
 load_dotenv()
 
@@ -36,7 +36,7 @@ async def main(args = None):
     print(writer_user_id, args.retriever_user_id)
 
     # Writer gives themself default permissions
-    permissions = nillion.Permissions.default_for_user(writer_user_id)
+    access_control = nillion.Permissions.default_for_user(writer_user_id)
     # Writer gives the reader permission to read/retrieve secret
     permissions.add_retrieve_permissions(set([args.retriever_user_id, writer_user_id]))
 

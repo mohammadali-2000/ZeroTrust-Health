@@ -72,8 +72,8 @@ pip install -r requirements.txt
 
 **4. Run the Machine Learning Application**
 ```bash
-cd healthcare_imaging_compute
-python3 healthcare_imaging_compute.py --disable_plot
+cd zerotrust_ml_core
+python3 main_compute.py --disable_plot
 ```
 
 *(Note: Nillion MPC cryptographic network execution requires the Nillion SDK `nilup`, which may be unavailable if Nillion servers are down.)*

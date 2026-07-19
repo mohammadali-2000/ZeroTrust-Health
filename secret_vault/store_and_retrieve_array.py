@@ -7,8 +7,8 @@ import pytest
 from dotenv import load_dotenv
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from helpers.nillion_client_helper import create_nillion_client
-from helpers.nillion_keypath_helper import getUserKeyFromFile, getNodeKeyFromFile
+from mpc_network_utils.nillion_client_helper import create_nillion_client
+from mpc_network_utils.nillion_keypath_helper import getUserKeyFromFile, getNodeKeyFromFile
 
 load_dotenv()
 
@@ -34,7 +34,7 @@ async def main():
     })
 
     # Store a SecretArray 
-    # Notice that both bindings and permissions are set to None
+    # Notice that both bindings and access_control are set to None
     # Bindings need to be set to use secrets in programs
     # Permissions need to be set to allow users other than the secret creator to use the secret
     store_id = await client.store_secrets(
