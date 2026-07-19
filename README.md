@@ -6,13 +6,13 @@
 
 Powered by **Fully Homomorphic Encryption (FHE)** via Microsoft's TenSEAL library, this platform demonstrates how to run a breast cancer classification model on purely encrypted ciphertexts.
 
-## 🚀 The Vision
+## The Vision
 
 In modern healthcare, data silos are a matter of life and death. Advances in AI are bottlenecked because institutions cannot legally or securely share diagnostic imaging data with one another due to strict privacy regulations (HIPAA, GDPR).
 
 **ZeroTrust Health** solves this. By leveraging Fully Homomorphic Encryption, we can take a patient's raw diagnostic data, encrypt it into a mathematical ciphertext, and perform Machine Learning predictions *directly on the ciphertext*. The data is never decrypted during the computation phase.
 
-## 🧠 Architecture & Workflow
+## Architecture & Workflow
 
 ![Architecture Diagram](public/Diagram.png)
 
@@ -28,7 +28,7 @@ Our architecture is split into a localized baseline test and a cryptographic FHE
 - The cryptographic engine computes a dot product between the encrypted data and the model weights.
 - The resulting ciphertext is then decrypted, proving that the prediction matches the plaintext reality perfectly.
 
-## 🔐 Core Infrastructure Stack
+## Core Infrastructure Stack
 
 - **TenSEAL FHE Protocol**: The backbone for homomorphic encryption, utilizing the CKKS scheme.
 - **Machine Learning Integration**: Leverages standardized diagnostic imaging cancer data from the UC Irvine repository.
@@ -36,7 +36,7 @@ Our architecture is split into a localized baseline test and a cryptographic FHE
 
 ---
 
-## 💻 Installation & Setup
+## Installation & Setup
 
 ### Requirements
 - Python 3.11+
