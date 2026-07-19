@@ -3,3 +3,4 @@ pandas==2.2.1
 matplotlib==3.8.4
 tenseal==0.3.16
 python-dotenv==1.0.1
+streamlit==1.32.2
