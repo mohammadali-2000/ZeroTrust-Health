@@ -55,7 +55,13 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-**3. Execute the ZeroTrust Engine**
+**3. Execute the ZeroTrust Web Dashboard (Recommended for Demos)**
+```bash
+cd zerotrust_ml_core
+streamlit run app.py
+```
+
+**4. Execute the ZeroTrust Engine (Terminal-only Mode)**
 ```bash
 cd zerotrust_ml_core
 python3 main_compute.py --disable_plot
