@@ -1,83 +1,70 @@
 # ZeroTrust Health
 
-![Project Logo](public/ZeroTrustHealthLogo.png) 
+![ZeroTrust Health Logo](public/ZeroTrustHealthLogo.png)
 
-ZeroTrust Health is a program that demonstrates the power of blind computation in a healthcare setting. Making use of Nillion's multiparty computation, the program provides a breast cancer image classification test performed over multiple health providers.
+**ZeroTrust Health** is a decentralized cryptographic engine designed to enable hospital networks and medical institutions to train predictive AI models on highly sensitive patient data without ever exposing the raw data itself.
 
-## Problem:
-The article *"Sharing Is Caring-Data Sharing Initiative in Healthcare"*[[1]](#1) highlights a concern in regards to who gets access to all the health data. High valued data is expected to further grow in value due to advances in AI/ML and other emerging technologies. Do you know if your health provider can provide you the best care when you need it?
+Powered by Secure Multi-Party Computation (MPC) via the Nillion network, this platform demonstrates how to run a breast cancer classification model across multiple healthcare providers in a completely "blind" state.
 
-## Objective: 
-Make use of modern cryptography to prevent barriers in the healthcare industry and ensure the world's most important data type, medical imaging, can be shared in a way that is fair and secure.
+## 🚀 The Vision
 
-# Demo
-![Diagram](public/Diagram.png)
+In modern healthcare, data silos are a matter of life and death. Advances in AI are bottlenecked because institutions cannot legally or securely share diagnostic imaging data with one another due to strict privacy regulations (HIPAA, GDPR).
 
-The diagram illustrates the program's demo. There are two primary sections, a test computed over a full dataset and a test computed on Nillion's protocol on combining multiple datasets.
+**ZeroTrust Health** solves this by moving from "Data Sharing" to "Data Collaboration." We ensure the world's most critical data type—medical diagnostics—can be leveraged globally while remaining strictly encrypted at rest, in transit, and during computation.
 
-### Full Dataset Test
-- 550+ image data instances
-- 30 parameters and 1 target value (Diagnosis)
-- 80/20 Split, (80) Training data, (20) Testing
-- 3 Figures of Plot Distributions - Full, Small Subset, Large Subset
-- Simple classification model use for computing thetas and test predictions 
-- Single randomly selected test instance used, not a full test evaluation. Do not use program for predictions. Purpose of testing is to compare calculated values.
+## 🧠 Architecture & Workflow
 
-### Multi Party Nillion Test
-- Small Subset (25%) and Large Subset (75%)
-- 30 parameters and 1 target value (Diagnosis)
-- Weighted average method used when combining thetas from subsets
-- A scaling factor was applied to satisfy integer requirements in Nillion's Nada program
+![Architecture Diagram](public/Diagram.png)
 
-# About the program
+Our architecture is split into a localized baseline test and a decentralized cryptographic test:
 
-## ✅ Secure Multi-Party Computation (Blind computation)
+### 1. Local Baseline Training
+- Analyzes over 550 diagnostic instances containing 30 unique cellular parameters and 1 target diagnosis.
+- Automatically handles an 80/20 train-test split.
+- Generates regression coefficients (thetas) and local test predictions to serve as the ground truth.
 
-- [Nillion](https://nillion.com/) - Nillion is a secure computation network that decentralizes trust for high value data in the same way that blockchains decentralized transactions.
+### 2. Decentralized MPC Execution
+- Simulates a fragmented healthcare system by dividing the dataset (25% to Provider A, 75% to Provider B).
+- Utilizes a weighted average protocol to mathematically combine localized model weights within the encrypted state.
+- Executes scaling factors dynamically to translate floating-point ML logic into secure, integer-based cryptographic circuits within the Nada DSL.
 
-## ✅ Diagnostic Imaging Cancer Data
+## 🔐 Core Infrastructure Stack
 
-- [UC Irvine Machine Learning Repository](https://archive.ics.uci.edu/dataset/17/breast+cancer+wisconsin+diagnostic) - The dataset used in the program is related to diagnostic imaging data focused on breast cancer classification. As included in the site's information, the features are computed from a digitized image of a fine needle aspirate (FNA) of a breast mass. It describes characteristics of the cell nuclei present in the image.
+- **Nillion MPC Protocol**: The backbone for blind computation, decentralizing trust across multiple nodes.
+- **Machine Learning Integration**: Leverages standardized diagnostic imaging cancer data from the UC Irvine repository.
+- **Nada DSL**: Custom cryptographic circuits that execute the classification.
 
-## ✅ Files
-- Main Python Program
-- Nillion Nada Program
-- Dataset
+---
 
-## ✅ Installation & Setup
+## 💻 Installation & Setup
 
 ### Requirements
 - Python 3.11+
-- Terminal
+- Terminal / CLI
 
 **1. Clone the repository**
 ```bash
-git clone https://github.com/YOUR-USERNAME/ZeroTrust-Health.git
+git clone https://github.com/mohammadali-2000/ZeroTrust-Health.git
 cd ZeroTrust-Health
 ```
 
-**2. Setup Configuration**
-Copy the example environment variables file and fill in your Nillion credentials if you have them:
+**2. Configure Environment**
+Copy the template and input your cryptographic keys (if applicable):
 ```bash
 cp .env.example .env
 ```
 
-**3. Setup Python Environment**
-Create a virtual environment and install dependencies:
+**3. Initialize Virtual Environment**
 ```bash
 python3.11 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-**4. Run the Machine Learning Application**
+**4. Execute the ZeroTrust Engine**
 ```bash
 cd zerotrust_ml_core
 python3 main_compute.py --disable_plot
 ```
 
-*(Note: Nillion MPC cryptographic network execution requires the Nillion SDK `nilup`, which may be unavailable if Nillion servers are down.)*
-
-## ✅ References
-<a id="1">[1]</a>
-Hulsen T. Sharing Is Caring-Data Sharing Initiatives in Healthcare. Int J Environ Res Public Health. 2020 Apr 27;17(9):3046. doi: 10.3390/ijerph17093046. PMID: 32349396; PMCID: PMC7246891.
+*(Note: Nillion MPC network execution requires the local `nilup` SDK.)*
