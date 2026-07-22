@@ -3,3 +3,5 @@ __pycache__/
 programs-compiled/
 .env
 .DS_Store
+.agents/
+.claude/
